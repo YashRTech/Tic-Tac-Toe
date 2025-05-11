@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Background -->
+  <rect x="0" y="0" width="64" height="64" rx="8" fill="#0192A2" />
+  
+  <!-- Grid -->
+  <line x1="22" y1="10" x2="22" y2="54" stroke="white" stroke-width="2" />
+  <line x1="42" y1="10" x2="42" y2="54" stroke="white" stroke-width="2" />
+  <line x1="10" y1="22" x2="54" y2="22" stroke="white" stroke-width="2" />
+  <line x1="10" y1="42" x2="54" y2="42" stroke="white" stroke-width="2" />
+  
+  <!-- X -->
+  <line x1="12" y1="12" x2="20" y2="20" stroke="white" stroke-width="3" stroke-linecap="round" />
+  <line x1="20" y1="12" x2="12" y2="20" stroke="white" stroke-width="3" stroke-linecap="round" />
+  
+  <!-- O -->
+  <circle cx="32" cy="32" r="7" stroke="white" stroke-width="3" fill="none" />
+  
+  <!-- X -->
+  <line x1="44" y1="44" x2="52" y2="52" stroke="white" stroke-width="3" stroke-linecap="round" />
+  <line x1="52" y1="44" x2="44" y2="52" stroke="white" stroke-width="3" stroke-linecap="round" />
+</svg>

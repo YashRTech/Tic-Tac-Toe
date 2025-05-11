@@ -12,7 +12,7 @@ A clean, responsive **Tic Tac Toe** game built using vanilla JavaScript, HTML, a
 
 ## Demo
 
-[Play Live](https://your-live-link.com)
+[Play Live](https://yashrtech.github.io/Tic-Tac-Toe/)
 
 ![Preview](preview.png)
 

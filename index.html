@@ -5,12 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
+
+    <meta name="description"
+        content="Play a classic Tic Tac Toe game built using JavaScript, HTML, and CSS. Track your wins, ties, and enjoy smooth game logic.">
+    <meta name="keywords" content="Tic Tac Toe, JavaScript game, Frontend project, DOM manipulation, Web game">
+    <meta name="author" content="Yash Tiwari">
+
+    <!-- Open Graph for social media preview -->
+    <meta property="og:title" content="Tic Tac Toe Game by Yash Tiwari">
+    <meta property="og:description"
+        content="Simple, responsive Tic Tac Toe game built with JavaScript. Track score, switch turns, and reset the game.">
+    <meta property="og:image" content="https://yourdomain.com/preview.png"> 
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="style.css">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body bgcolor="black" text="white">
 
-    <h1>Tic Tac Toe Game</h1>
+    <div class="heading">
+        <h1>Tic-Tac-Toe</h1>
+    </div>
+
+    <div class="scores">
+        <div class="player1">Player X: <span class="scoreX">0</span></div>
+        <div class="tied">Tie: <span class="scoreTie">0</span></div>
+        <div class="player2">Player O: <span class="scoreO">0</span></div>
+    </div>
 
     <div class="grid-container">
         <button data-btn="0" class="btn"></button>
@@ -26,9 +53,15 @@
 
     <div class="turn"></div>
     <div class="winner"></div>
-    <button type="button" class="restart">New Game</button>
+    <div class="btn-container">
+        <button type="button" class="restart">New Game</button>
+    </div>
 
-    <script src="script.js"></script>
+    <footer>
+        <p>© 2025 Yash Tiwari <a href="https://github.com/YashRTech/Tic-Tac-Toe" target="_blank"><img
+                    src="github-mark.svg" alt="github" height="25" width="auto"></a></p>
+    </footer>
+    <script src="./script.js"></script>
 </body>
 
 </html>

@@ -43,11 +43,15 @@ const Player = (name, marker) => {
 const gameController = (() => {
   let player1 = Player("Player 1", "X");
   let player2 = Player("Player 2", "O");
+  let player1Score = 0;
+  let player2Score = 0;
+  let tieScore = 0;
 
   let currentPlayer = player1;
 
   const switchPlayer = () => {
     currentPlayer = currentPlayer === player1 ? player2 : player1;
+    displayDom.updateTurn(currentPlayer.marker);
   };
 
   const winningPatterns = [
@@ -68,10 +72,7 @@ const gameController = (() => {
   };
 
   const checkTie = () => {
-    if (
-      gameBoard.getMoves() === 9 &&
-      checkWinner(gameBoard.getBoard(), currentPlayer)
-    ) {
+    if (gameBoard.getMoves() === 9) {
       console.log("Game Tie");
       return "Game Tie";
     }
@@ -83,21 +84,44 @@ const gameController = (() => {
 
     if (checkWinner(gameBoard.getBoard(), currentPlayer.marker)) {
       console.log("Winner is " + currentPlayer.name);
-      displayDom.showWinner(currentPlayer.name);
+      displayDom.showWinner(currentPlayer.marker);
       displayDom.disableBtns();
+      if (currentPlayer.marker === "X") {
+        player1Score++;
+      } else {
+        player2Score++;
+      }
+      displayDom.hideTurn();
+      displayDom.updatePlayersScore();
       return;
     }
     if (checkTie()) {
       displayDom.showTie();
+      tieScore++;
+      displayDom.hideTurn();
+      displayDom.disableBtns();
+      displayDom.updatePlayersScore();
       return;
     }
 
     switchPlayer();
   };
 
+  const getPlayer1Score = () => player1Score;
+  const getPlayer2Score = () => player2Score;
+  const getTieScore = () => tieScore;
+
   const getCurrentPlayer = () => currentPlayer;
 
-  return { playRound, getCurrentPlayer, checkWinner, checkTie };
+  return {
+    playRound,
+    getCurrentPlayer,
+    checkWinner,
+    checkTie,
+    getPlayer1Score,
+    getPlayer2Score,
+    getTieScore,
+  };
 })();
 
 // DOM Display
@@ -105,12 +129,22 @@ const displayDom = (() => {
   let turn = document.querySelector(".turn");
   const btns = document.querySelectorAll(".btn");
   let winner = document.querySelector(".winner");
+  const scoreX = document.querySelector(".scoreX");
+  const scoreO = document.querySelector(".scoreO");
+  const scoreTie = document.querySelector(".scoreTie");
 
   turn.textContent =
     "Player '" + gameController.getCurrentPlayer().marker + "' turn";
 
-  const showWinner = (winnerName) => {
-    winner.textContent = `Congratulations ${winnerName} win 🎉🎉`;
+  const defaultTurn = () => {
+    turn.textContent =
+    "Player '" + gameController.getCurrentPlayer().marker + "' turn";
+  }
+  const showWinner = (winnerMarker) => {
+    winner.textContent = `Congratulations Player ${winnerMarker} win 🎉🎉`;
+  };
+  const hideWinner = () => {
+    winner.textContent = "";
   };
 
   const showTie = () => {
@@ -133,7 +167,32 @@ const displayDom = (() => {
     });
   };
 
-  return { showWinner, showTie, showMarker, disableBtns, enableBtns };
+  const updateTurn = (marker) => {
+    turn.textContent = `Player '${marker}' turn`;
+  };
+  const hideTurn = () => {
+    turn.textContent = "";
+  };
+  
+
+  const updatePlayersScore = () => {
+    scoreX.textContent = gameController.getPlayer1Score();
+    scoreO.textContent = gameController.getPlayer2Score();
+    scoreTie.textContent = gameController.getTieScore();
+  };
+
+  return {
+    showWinner,
+    showTie,
+    showMarker,
+    disableBtns,
+    enableBtns,
+    updateTurn,
+    hideTurn,
+    defaultTurn,
+    hideWinner,
+    updatePlayersScore,
+  };
 })();
 
 // Event Listeners
@@ -148,11 +207,12 @@ container.addEventListener("click", (e) => {
   handleConatinerClick(e);
 });
 
-
 const newGame = document.querySelector(".restart");
 
 const handleReset = () => {
   gameBoard.reset();
-}
+  displayDom.hideWinner();
+  displayDom.defaultTurn();
+};
 
 newGame.addEventListener("click", handleReset);
